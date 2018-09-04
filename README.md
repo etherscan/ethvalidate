@@ -3,7 +3,7 @@ This tool is to validate transaction, address and token balance from public ethe
 
 # Usage
 
-Optional parameters
+Optional parameters <br>
 Transaction <br>
 tx - transactionhash
 <br>
