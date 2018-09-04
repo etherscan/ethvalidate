@@ -32,8 +32,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" href="img/favicon2.ico">
     <link rel="shortcut icon" href="/img/favicon2.ico" />
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="/fonts/font-awesome/css/font-awesome.min.css">
 </head>
 
@@ -47,16 +47,12 @@
                 <a href="/" class="navbar-brand">
                     <img src="/img/logo.png" width="42" height="40" style="margin-top:-5px;" alt=""> EthValidate
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav">
-                        <li class="nav-item active">
+                        <li class="nav-item ">
                             <a class="nav-link" href="/">Transaction</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="/address">Address</a>
                         </li>
                         <li class="nav-item">
@@ -69,11 +65,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <h5>TxHash</h5>
+                    <h5>Address</h5>
                     <div class="row">
                         <div class="col-md-10">
                             <div class="input-group">
-                                <input type="text" id="searchTx" maxlength="66" class="form-control" placeholder="Search for TxHash..">
+                                <input type="text" id="searchAddr" class="form-control" maxlength="42" placeholder="Search for...">
                                 <span class="input-group-btn">
                                     <button id="btn-go" class="btn btn-default" type="button">Go!</button>
                                 </span>
@@ -82,6 +78,16 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 data-info"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 datasource" style="display: none">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <font style="margin-left:5px;" size="1">Price data Source: <a href="https://www.cryptocompare.com/"
+                                            target="_blank" title="Pricing Data Provided by CryptoCompare" rel="nofollow">CryptoCompare</a></font>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="loader" style="display: none"></div>
                 </div>
@@ -105,6 +111,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
     <footer>
@@ -149,16 +157,16 @@
             </div>
         </div>
     </div>
-
     <!-- /container -->
     <script src="/js/vendor/jquery-3.3.1.min.js"></script>
-    <script src="/js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
 
-    <script src="/js/bignumber.min.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/api.js"></script>
-    <script src="/js/helper.js"></script>
-    <script src="/js/transaction.js"></script>
+    <script src="js/bignumber.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/helper.js"></script>
+    <script src="js/address.js"></script>
+
 </body>
 
 </html>
