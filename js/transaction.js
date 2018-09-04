@@ -95,9 +95,7 @@ function getTransaction() {
 }
 
 
-function generateTxInfo(result, network) {
-    console.log(result);
-    console.log(network);
+function generateTxInfo(result, network) {  
     var header = '<div class="card mt-3"> <div class="card-body"> <h5 class="card-title">{{network}}</h5>';
     var output = '';
 
@@ -111,11 +109,7 @@ function generateTxInfo(result, network) {
         var block = result.block;
         var latestBlock = result.latestBlock;
 
-
-
-        output = header.replace('{{network}}', network);
-        // output += lbl.replace('{{label}}', 'Tx Hash:').replace('{{value}}', '<a href="https://etherscan.io/tx/' + result.hash + '">' + result.hash + '</a>');
-        // output = output.replace('{{label}}', 'Tx Status:').replace('{{value}}', result.hash);
+        output = header.replace('{{network}}', network);        
 
         var confirmationBlock = new BigNumber(latestBlock) - new BigNumber(block.number);
         var url = 'etherscan.io';
@@ -129,7 +123,6 @@ function generateTxInfo(result, network) {
         
 
         var txHashUrl ='<a href="https://' + url +'/tx/' + result.hash + '">' + result.hash + '</a>';
-
 
         output += lbl.replace('{{label}}', 'TxHash').replace('{{value}}', txHashUrl);
         output += lbl.replace('{{label}}', 'Status').replace('{{value}}', receipt.status == '0x1' ? '<span class="badge badge-success">Success</span>' : '<span class="badge badge-danger">Fail</span>');
