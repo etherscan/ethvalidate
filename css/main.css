@@ -59,15 +59,13 @@ footer {
   position: absolute;
 }
 
-.Network {
-  font-size: 0.8125rem;
-}
 
 .wrapper { 
   width: auto;
   padding: 0 auto;
   margin: 0 auto;
   overflow: auto;
+   font-size: 0.8125rem !important;
 }
 
 
