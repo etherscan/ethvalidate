@@ -7,13 +7,14 @@ $(document).ready(function () {
         $('#searchAddr').val(param);
         getAddress();
     }
-
-    $('#btn-go').click(function () {               
-        getAddress();        
-    });
-
     
 });
+
+$(document).on('click','.btn-go',function(){
+    getAddress();       
+  });
+
+
 
 function getAddress() {
     $('.data-info').empty(); 
@@ -51,7 +52,7 @@ function getAddress() {
         callMainnetNetwork('', addr,'',value, 2)
             .then(function (data) {
                 if (data.error) {
-                    console.log(data.error);
+                    generateTxErr(data.error, value);
                 } else {
                     getEtherPrice('ETH', 'BTC,USD,EUR')
                         .then(function (ethPrice) {
@@ -68,7 +69,15 @@ function getAddress() {
                 }
 
             }, function(err){
-                console.log(err);
+                generateTxErr(err.statusText, value);
+
+                count++;
+                
+                if (count == totalSelectedNetwork) {
+                    $('.loader').hide();
+                    $('.datasource').show();
+                    positionFooter();
+                }
             });
     });
 
@@ -78,7 +87,7 @@ function getAddress() {
         callTestnetNetwork('', addr,'',value, 2)
             .then(function (data) {
                 if (data.error) {
-                    console.log(data.error);
+                    generateTxErr(data.error, value);
                 } else {
                     getEtherPrice('ETH', 'BTC,USD,EUR')
                         .then(function (ethPrice) {
@@ -95,7 +104,15 @@ function getAddress() {
                 }
 
             }, function(err){
-                console.log(err);
+                generateTxErr(err.statusText, value);
+
+                count++;
+                
+                if (count == totalSelectedNetwork) {
+                    $('.loader').hide();
+                    $('.datasource').show();
+                    positionFooter();
+                }
             });
            
     });
@@ -105,44 +122,50 @@ function getAddress() {
 
 function generateAddrInfo(result, network, ethPrice, addr) {
 
-    var header = '<div class="card mt-3"> <div class="card-body"> <h5 class="card-title">{{network}}</h5>';
-    var output = '';
+    try {
+        var header = '<div class="card mt-3"> <div class="card-body"> <h5 class="card-title">{{network}}</h5>';
+        var output = '';
 
-    if (result == null) {
-        header += '<div class="row"><div class="col-sm-12">Address not found</div></div>';
-        output = header.replace('{{network}}', network);
-    } else {
+        if (result == null) {
+            header += '<div class="row"><div class="col-sm-12">Address not found</div></div>';
+            output = header.replace('{{network}}', network);
+        } else {
 
-        var lbl = '<div class="row mb-1"><div class="col-sm-2">{{label}}:</div><div class="col-sm-9">{{value}}</div></div>';
+            var lbl = '<div class="row mb-1"><div class="col-sm-2">{{label}}:</div><div class="col-sm-9">{{value}}</div></div>';
 
-        output = header.replace('{{network}}', network);
-        
-        var _result = new BigNumber(result);
-        var etherValue = getEtherValue(_result);
-        var usdPrice = ethPrice.USD * etherValue;
-        var eurPrice = ethPrice.EUR * etherValue;
-        var btcPrice = ethPrice.BTC * etherValue;
-        var url = 'etherscan.io';
+            output = header.replace('{{network}}', network);
 
-        if (network.indexOf('kovan') > -1)
-            url = 'kovan.' + url;
-        else if (network.indexOf('ropsten') > -1)
-            url = 'ropsten.' + url;
-        else if (network.indexOf('rinkeby') > -1)
-            url = 'rinkeby.' + url;
+            var _result = new BigNumber(result);
+            var etherValue = getEtherValue(_result);
+            var usdPrice = ethPrice.USD * etherValue;
+            var eurPrice = ethPrice.EUR * etherValue;
+            var btcPrice = ethPrice.BTC * etherValue;
+            var url = 'etherscan.io';
 
-        var addrUrl ='<a href="https://' + url +'/address/' + addr + '">' + addr + '</a>';
+            if (network.indexOf('kovan') > -1)
+                url = 'kovan.' + url;
+            else if (network.indexOf('ropsten') > -1)
+                url = 'ropsten.' + url;
+            else if (network.indexOf('rinkeby') > -1)
+                url = 'rinkeby.' + url;
 
-        output += lbl.replace('{{label}}', 'Address').replace('{{value}}', addrUrl);
-        output += lbl.replace('{{label}}', 'Balance').replace('{{value}}', etherValue + ' Ether');
-        output += lbl.replace('{{label}}', 'USD Value').replace('{{value}}', '$ ' + usdPrice.toFixed(2) + ' <font size="1">(@' + ethPrice.USD + '/Eth)</font>' );
-        output += lbl.replace('{{label}}', 'EUR Value').replace('{{value}}', '€ ' + eurPrice.toFixed(2) + ' <font size="1">(@' + ethPrice.EUR + '/Eth)</font>' );
-        output += lbl.replace('{{label}}', 'BTC Value').replace('{{value}}', btcPrice.toFixed(2) + ' Btc' + ' <font size="1">(@' + ethPrice.BTC + '/Eth)</font>' );
-  
+            var addrUrl = '<a href="https://' + url + '/address/' + addr + '">' + addr + '</a>';
+
+            output += lbl.replace('{{label}}', 'Address').replace('{{value}}', addrUrl);
+            output += lbl.replace('{{label}}', 'Balance').replace('{{value}}', etherValue + ' Ether');
+            output += lbl.replace('{{label}}', 'USD Value').replace('{{value}}', '$ ' + usdPrice.toFixed(2) + ' <font size="1">(@' + ethPrice.USD + '/Eth)</font>');
+            output += lbl.replace('{{label}}', 'EUR Value').replace('{{value}}', '€ ' + eurPrice.toFixed(2) + ' <font size="1">(@' + ethPrice.EUR + '/Eth)</font>');
+            output += lbl.replace('{{label}}', 'BTC Value').replace('{{value}}', btcPrice.toFixed(2) + ' Btc' + ' <font size="1">(@' + ethPrice.BTC + '/Eth)</font>');
+
+        }
+
+        $('.data-info').append(output);
+    } catch (err) {
+        generateTxErr(err, network);
     }
 
-    $('.data-info').append(output);
 
-    
+
+
 
 }

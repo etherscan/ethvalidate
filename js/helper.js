@@ -51,8 +51,7 @@ function getCommonTransaction(url, txHash) {
                     reject(data.error);
                 else if (data.result == null)
                     resolve(data);
-                else {
-                    console.log(data);
+                else {                    
                     var receipt = commonAPI(url, 'eth_getTransactionReceipt', [txHash]);
                     var block = commonAPI(url, 'eth_getBlockByNumber', [data.result.blockNumber, false]);
                     var latestBlock = commonAPI(url, 'eth_blockNumber', []);
@@ -113,6 +112,8 @@ function getCommonTransaction(url, txHash) {
                         }                    
                     });
                 }
+            }, function (err){            
+                reject(err);
             })
     })
 }
@@ -126,9 +127,7 @@ function getCommonAddress(url, addr) {
                     reject(data.error);
 
                 resolve(data);
-            }, function (err, val){
-                console.log(err);
-                console.log(val);
+            }, function (err, val){              
                 reject(err);
             })
 
@@ -155,6 +154,8 @@ function getCommonToken(url, addr, contractAddr) {
                         return resolve(data);
                     });
                 }
+            }, function (err, val){              
+                reject(err);
             })
 
     })

@@ -1,6 +1,6 @@
    body {
     padding-top: 100px !important;
-    font-size: 0.9em;
+    
     }
 
    .loader {
@@ -59,15 +59,18 @@ footer {
   position: absolute;
 }
 
-
 .wrapper { 
   width: auto;
   padding: 0 auto;
   margin: 0 auto;
   overflow: auto;
-   font-size: 0.8125rem !important;
+  font-size: 0.8125rem;
 }
 
+.navbar-nav {
+  font-size: 1.015625rem !important;
+  margin-top: -5px;
+}
 
 
 
