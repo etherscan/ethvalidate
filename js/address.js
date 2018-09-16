@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var param = getParam('a');
     
-    $("#ethnetworkall").trigger('click');
+    checkNetwork();
     
     if (!$.isEmptyObject(param)) {
         $('#searchAddr').val(param);

@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).ready(function() {    
+   
     $("#ethnetworkall").change(function() {
         if (this.checked) {
             $(".ethnetwork").each(function() {
@@ -106,6 +107,28 @@ $(document).ready(function() {
     loadNetwork();
 });
 
+function checkNetwork() {
+    var n = getParam('n');
+    
+    if (!$.isEmptyObject(n)){
+
+        var _networks = n.split(',');
+
+        $.each(_networks, function (key, net) { 
+            if (net == 'mainnet')
+                $("#ethnetworkall").trigger('click');
+            else if (net == 'testnet')
+                $("#testnetworkall").trigger('click');
+            else
+                $('#chk' + net + '').trigger('click');  
+        });
+        
+    } else {
+        $("#ethnetworkall").trigger('click');
+    }
+
+}
+
 $(window).bind("load", function() {        
     positionFooter();    
     $(window)
@@ -146,13 +169,13 @@ function loadNetwork(){
     $.each(mainnet, function(k, v){
         
         if (v.nodeName){
-            $('<li />', {html: ' <input type="checkbox" class="ethnetwork" name="' + v.nodeName +'"> ' + v.nodeName , class:'list-group-item'}).appendTo('ul.ulmainnet');
+            $('<li />', {html: ' <input type="checkbox" id="chk'+ v.id + '" class="ethnetwork" name="' + v.nodeName +'"> ' + v.nodeName , class:'list-group-item'}).appendTo('ul.ulmainnet');
         }
     });
 
     $.each(customMainnnet, function(k,v){
         if (v.nodeName){
-            $('<li />', {html: ' <input type="checkbox" class="ethnetwork" name="' + v.nodeName +'"> ' + v.nodeName  + '<a href="#" title="Remove Custom Node" onclick="removeNetwork(\'mainnet\', \'' + v.nodeName + '\')" style="float:right;color:#f80000"><i class="fa fa-minus"></i></a>', class:'list-group-item'}).appendTo('ul.ulmainnet');
+            $('<li />', {html: ' <input type="checkbox" id="chk'+ v.nodeName + '" class="ethnetwork" name="' + v.nodeName +'"> ' + v.nodeName  + '<a href="#" title="Remove Custom Node" onclick="removeNetwork(\'mainnet\', \'' + v.nodeName + '\')" style="float:right;color:#f80000"><i class="fa fa-minus"></i></a>', class:'list-group-item'}).appendTo('ul.ulmainnet');
         }
     });
 
@@ -161,14 +184,14 @@ function loadNetwork(){
     $.each(testnet, function(k, v){
         
         if (v.nodeName){
-            $('<li />', {html: ' <input type="checkbox" class="testnetwork" name="' + v.nodeName +'"> ' + v.nodeName , class:'list-group-item'}).appendTo('ul.ultestnet');
+            $('<li />', {html: ' <input type="checkbox" id="chk'+ v.id + '" class="testnetwork" name="' + v.nodeName +'"> ' + v.nodeName , class:'list-group-item'}).appendTo('ul.ultestnet');
         }
     });
 
     $.each(customTestnet, function(k,v){
-        console.log(v);
+      
         if (v.nodeName){
-            $('<li />', {html: ' <input type="checkbox" class="testnetwork" name="' + v.nodeName +'"> ' + v.nodeName  + '<a href="#" title="Remove Custom Node" onclick="removeNetwork(\'testnet\', \'' + v.nodeName + '\')" style="float:right;color:#f80000"><i class="fa fa-minus"></i></a>', class:'list-group-item'}).appendTo('ul.ultestnet');
+            $('<li />', {html: ' <input type="checkbox" id="chk'+ v.nodeName + '" class="testnetwork" name="' + v.nodeName +'"> ' + v.nodeName  + '<a href="#" title="Remove Custom Node" onclick="removeNetwork(\'testnet\', \'' + v.nodeName + '\')" style="float:right;color:#f80000"><i class="fa fa-minus"></i></a>', class:'list-group-item'}).appendTo('ul.ultestnet');
         }
     });
 
@@ -201,13 +224,13 @@ function loadCustomNetwork(network){
 function getMainnetNetwork(){
     var networkList = [
         {
-            nodeName: 'infura', url: 'https://mainnet.infura.io/5iBVcfHwwqGdhClk8CQS', port: ''
+           id: 'infura', nodeName: 'infura', url: 'https://mainnet.infura.io/5iBVcfHwwqGdhClk8CQS', port: ''
         },
         {
-            nodeName: 'myetherwallet', url: 'https://api.myetherwallet.com/eth', port: ''
+            id: 'myetherwallet', nodeName: 'myetherwallet', url: 'https://api.myetherwallet.com/eth', port: ''
         },
         {
-            nodeName: 'mycrypto', url: 'https://api.mycryptoapi.com/eth', port: ''
+            id: 'mycrypto', nodeName: 'mycrypto', url: 'https://api.mycryptoapi.com/eth', port: ''
         }
     ];
 
@@ -217,13 +240,13 @@ function getMainnetNetwork(){
 function getTestnetNetwork() {
     var networkList = [
         {
-            nodeName: 'ropsten (infura)', url: 'https://ropsten.infura.io/5iBVcfHwwqGdhClk8CQS', port: ''
+            id: 'ropsten_infura',nodeName: 'ropsten (infura)', url: 'https://ropsten.infura.io/5iBVcfHwwqGdhClk8CQS', port: ''
         },
         {
-            nodeName: 'kovan (infura)', url: 'https://kovan.infura.io/5iBVcfHwwqGdhClk8CQS', port: ''
+            id: 'kovan_infura',nodeName: 'kovan (infura)', url: 'https://kovan.infura.io/5iBVcfHwwqGdhClk8CQS', port: ''
         },
         {
-            nodeName: 'rinkeby (infura)', url: 'https://rinkeby.infura.io/5iBVcfHwwqGdhClk8CQS', port: ''
+            id: 'rinkeby_infura', nodeName: 'rinkeby (infura)', url: 'https://rinkeby.infura.io/5iBVcfHwwqGdhClk8CQS', port: ''
         }
     ];
 

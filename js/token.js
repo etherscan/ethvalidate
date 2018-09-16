@@ -2,7 +2,7 @@ $(document).ready(function () {
     var addr = getParam('a');
     var contractAddr = getParam('c');
 
-    $("#ethnetworkall").trigger('click');
+    checkNetwork();
 
     if (!$.isEmptyObject(addr) && !$.isEmptyObject(contractAddr)) {
         $('#searchAddr').val(addr);
