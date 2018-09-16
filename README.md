@@ -14,14 +14,14 @@ https://etherscan.github.io/ethvalidate?tx=<hash>
 a - address
 <br>
   sample usage<br>
-  https://etherscan.github.io/ethvalidate?a=<address>
+  https://etherscan.github.io/ethvalidate/address?a=<address>
 <br><br>
 <b>Token</b><br>
 a - address
 c - contractaddress
 <br>
    sample usage<br>
-  https://etherscan.github.io/ethvalidate?a=<address>&c=<contractaddress>
+  https://etherscan.github.io/ethvalidate/token?a=<address>&c=<contractaddress>
 <br>
   <b>Network</b><br>
 n - network<br>
