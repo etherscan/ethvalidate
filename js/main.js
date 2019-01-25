@@ -224,7 +224,7 @@ function loadCustomNetwork(network){
 function getMainnetNetwork(){
     var networkList = [
         {
-           id: 'infura', nodeName: 'infura', url: 'https://mainnet.infura.io/5iBVcfHwwqGdhClk8CQS', port: ''
+           id: 'infura', nodeName: 'infura', url: 'https://mainnet.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
         },
         {
             id: 'myetherwallet', nodeName: 'myetherwallet', url: 'https://api.myetherwallet.com/eth', port: ''
@@ -240,13 +240,13 @@ function getMainnetNetwork(){
 function getTestnetNetwork() {
     var networkList = [
         {
-            id: 'ropsten_infura',nodeName: 'ropsten (infura)', url: 'https://ropsten.infura.io/5iBVcfHwwqGdhClk8CQS', port: ''
+            id: 'ropsten_infura',nodeName: 'ropsten (infura)', url: 'https://ropsten.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
         },
         {
-            id: 'kovan_infura',nodeName: 'kovan (infura)', url: 'https://kovan.infura.io/5iBVcfHwwqGdhClk8CQS', port: ''
+            id: 'kovan_infura',nodeName: 'kovan (infura)', url: 'https://kovan.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
         },
         {
-            id: 'rinkeby_infura', nodeName: 'rinkeby (infura)', url: 'https://rinkeby.infura.io/5iBVcfHwwqGdhClk8CQS', port: ''
+            id: 'rinkeby_infura', nodeName: 'rinkeby (infura)', url: 'https://rinkeby.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
         }
     ];
 
