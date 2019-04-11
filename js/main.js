@@ -247,6 +247,9 @@ function getTestnetNetwork() {
         },
         {
             id: 'rinkeby_infura', nodeName: 'rinkeby (infura)', url: 'https://rinkeby.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
+        },
+        {
+            id: 'goerli_infura', nodeName: 'goerli (infura)', url: 'https://goerli.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
         }
     ];
 
