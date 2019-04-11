@@ -141,14 +141,16 @@ function generateTxInfo(result, network) {
                 url = 'ropsten.' + url;
             else if (network.indexOf('rinkeby') > -1)
                 url = 'rinkeby.' + url;
+            else if (network.indexOf('goerli') > -1)
+                url = 'goerli.' + url;
             
             var txHashUrl ='<a href="https://' + url +'/tx/' + result.hash + '">' + result.hash + '</a>';
     
             output += lbl.replace('{{label}}', 'TxHash').replace('{{value}}', txHashUrl);
             output += lbl.replace('{{label}}', 'Status').replace('{{value}}', receipt.status == '0x1' ? '<span class="badge badge-success">Success</span>' : '<span class="badge badge-danger">Fail</span>');
-            output += lbl.replace('{{label}}', 'Block Height').replace('{{value}}', '<a href="https://etherscan.io/block/' + new BigNumber(block.number).toString() + '" rel="nofollow">' + new BigNumber(block.number).toString() + '</a> (' + confirmationBlock.toString() + ' block confirmations)');
-            output += lbl.replace('{{label}}', 'From').replace('{{value}}', '<a href="https://etherscan.io/address/' + result.from + '" rel="nofollow">' + result.from + '</a>');
-            output += lbl.replace('{{label}}', 'To').replace('{{value}}', '<a href="https://etherscan.io/address/' + result.to + '" rel="nofollow">' + result.to + '</a>');
+            output += lbl.replace('{{label}}', 'Block Height').replace('{{value}}', '<a href="https://' + url + '/block/' + new BigNumber(block.number).toString() + '" rel="nofollow">' + new BigNumber(block.number).toString() + '</a> (' + confirmationBlock.toString() + ' block confirmations)');
+            output += lbl.replace('{{label}}', 'From').replace('{{value}}', '<a href="https://' + url + '/address/' + result.from + '" rel="nofollow">' + result.from + '</a>');
+            output += lbl.replace('{{label}}', 'To').replace('{{value}}', '<a href="https://' + url + '/address/' + result.to + '" rel="nofollow">' + result.to + '</a>');
             output += lbl.replace('{{label}}', 'Value').replace('{{value}}', getEtherValue(result.value).toString() + ' Ether');
     
             if (result.input !== '0x') {
@@ -164,10 +166,10 @@ function generateTxInfo(result, network) {
                             var tto = '';
     
                             if (log.topics[1])
-                                ffrom = '<a class="address-tag" href="https://etherscan.io/address/' + convertHex2Addr(log.topics[1]) + '" rel="nofollow">' + convertHex2Addr(log.topics[1]) + '</a>';
+                                ffrom = '<a class="address-tag" href="https://' + url + '/address/' + convertHex2Addr(log.topics[1]) + '" rel="nofollow">' + convertHex2Addr(log.topics[1]) + '</a>';
     
                             if (log.topics[2])
-                                tto = '<a class="address-tag" href="https://etherscan.io/address/' + convertHex2Addr(log.topics[2]) + '" rel="nofollow">' + convertHex2Addr(log.topics[2]) + '</a>';
+                                tto = '<a class="address-tag" href="https://' + url + '/address/' + convertHex2Addr(log.topics[2]) + '" rel="nofollow">' + convertHex2Addr(log.topics[2]) + '</a>';
     
                             if (log.topics[1] && log.topics[2]) {
                                 tokenTransfer += 'From ' + ffrom + ' To ' + tto + ' for ';
@@ -179,7 +181,7 @@ function generateTxInfo(result, network) {
                                 }
                                
                                 if (log.symbol !== "0x")
-                                    tokenTransfer += ' <a href="https://etherscan.io/token/' + result.to + '" rel="nofollow">' + log.symbol + '</a>';
+                                    tokenTransfer += ' <a href="https://' + url + '/token/' + result.to + '" rel="nofollow">' + log.symbol + '</a>';
         
                                 if (tokenTransfer.length > 0)
                                     tokenTransfer += '<br />';

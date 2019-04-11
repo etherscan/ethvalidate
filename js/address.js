@@ -148,6 +148,8 @@ function generateAddrInfo(result, network, ethPrice, addr) {
                 url = 'ropsten.' + url;
             else if (network.indexOf('rinkeby') > -1)
                 url = 'rinkeby.' + url;
+            else if (network.indexOf('goerli') > -1)
+                url = 'goerli.' + url;
 
             var addrUrl = '<a href="https://' + url + '/address/' + addr + '">' + addr + '</a>';
 

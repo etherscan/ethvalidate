@@ -146,9 +146,20 @@ function generateTokenInfo(data, network, ethPrice, contractAddr) {
             var lbl = '<div class="row mb-1"><div class="col-sm-2">{{label}}:</div><div class="col-sm-9">{{value}}</div></div>';
             output = header.replace('{{network}}', network);
 
+            var url = 'etherscan.io';
+
+            if (network.indexOf('kovan') > -1)
+                url = 'kovan.' + url;
+            else if (network.indexOf('ropsten') > -1)
+                url = 'ropsten.' + url;
+            else if (network.indexOf('rinkeby') > -1)
+                url = 'rinkeby.' + url;
+            else if (network.indexOf('goerli') > -1)
+                url = 'goerli.' + url;
+
             var balance = convertDecimals(parseInt(data.decimal), new BigNumber(data.result));
             var value = ethPrice.ETH ? new BigNumber(balance * ethPrice.ETH) + ' ETH  <font size="1">(@' + ethPrice.ETH + '/Eth)</font>' : '0.00000000';
-            output += lbl.replace('{{label}}', 'Balance').replace('{{value}}', balance + ' <a href="https://etherscan.io/token/' + contractAddr + '" rel="nofollow">' + data.symbol + '</a>');
+            output += lbl.replace('{{label}}', 'Balance').replace('{{value}}', balance + ' <a href="https://' + url + '/token/' + contractAddr + '" rel="nofollow">' + data.symbol + '</a>');
             output += lbl.replace("{{label}}", 'Value').replace('{{value}}', value);
             output += lbl.replace("{{label}}", 'Decimal').replace('{{value}}', data.decimal);
 
