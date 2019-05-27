@@ -34,6 +34,7 @@ n - network<br>
   <li>ropsten_infura</li>
   <li>kovan_infura</li>
   <li>rinkeby_infura</li>
+  <li>goerli_infura</li>
 </ul>
 sample usage <br>
 https://etherscan.github.io/ethvalidate/?n=infura,mycrypto <br>
