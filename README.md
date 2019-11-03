@@ -14,7 +14,7 @@ https://etherscan.github.io/ethvalidate/?tx=0xa2882cca690d1898d7cc13ca9c978c04e8
 a - address
 <br>
   sample usage<br>
-  https://etherscan.github.io/ethvalidate/address?a=0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be
+  https://etherscan.github.io/ethvalidate/address?a=0x04668Ec2f57cC15c381b461B9fEDaB5D451c8F7F
 <br><br>
 <b>Token</b><br>
 a - address
