@@ -156,7 +156,7 @@ async function generateAddrInfo(result, network, ethPrice, addr, isMainnet) {
 
             output += lbl.replace('{{label}}', 'Address').replace('{{value}}', addrUrl);
             output += lbl.replace('{{label}}', 'Balance').replace('{{value}}', etherValue + ' Ether');
-            output += lbl.replace('{{label}}', 'Nonce').replace('{{value}}', addrNonce);
+            output += lbl.replace('{{label}}', 'Current Nonce').replace('{{value}}', addrNonce);
             output += lbl.replace('{{label}}', 'USD Value').replace('{{value}}', '$ ' + usdPrice.toFixed(2) + ' <font size="1">(@' + ethPrice.USD + '/Eth)</font>');
             output += lbl.replace('{{label}}', 'EUR Value').replace('{{value}}', '€ ' + eurPrice.toFixed(2) + ' <font size="1">(@' + ethPrice.EUR + '/Eth)</font>');
             output += lbl.replace('{{label}}', 'BTC Value').replace('{{value}}', btcPrice.toFixed(2) + ' Btc' + ' <font size="1">(@' + ethPrice.BTC + '/Eth)</font>');
