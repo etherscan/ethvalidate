@@ -56,7 +56,7 @@ function getAddress() {
                 } else {
                     getEtherPrice('ETH', 'BTC,USD,EUR')
                         .then(function (ethPrice) {
-                            generateAddrInfo(data.result, value, ethPrice, addr);
+                            generateAddrInfo(data.result, value, ethPrice, addr, true);
                         });
                 }
 
@@ -91,7 +91,7 @@ function getAddress() {
                 } else {
                     getEtherPrice('ETH', 'BTC,USD,EUR')
                         .then(function (ethPrice) {
-                            generateAddrInfo(data.result, value, ethPrice, addr);
+                            generateAddrInfo(data.result, value, ethPrice, addr, false);
                         });
                 }
 
@@ -120,7 +120,7 @@ function getAddress() {
     
 }
 
-function generateAddrInfo(result, network, ethPrice, addr) {
+async function generateAddrInfo(result, network, ethPrice, addr, isMainnet) {
 
     try {
         var header = '<div class="card mt-3"> <div class="card-body"> <h5 class="card-title">{{network}}</h5>';
@@ -136,6 +136,7 @@ function generateAddrInfo(result, network, ethPrice, addr) {
             output = header.replace('{{network}}', network);
 
             var _result = new BigNumber(result);
+            var addrNonce = await getAddrNonce(addr, network, isMainnet)
             var etherValue = getEtherValue(_result);
             var usdPrice = ethPrice.USD * etherValue;
             var eurPrice = ethPrice.EUR * etherValue;
@@ -155,6 +156,7 @@ function generateAddrInfo(result, network, ethPrice, addr) {
 
             output += lbl.replace('{{label}}', 'Address').replace('{{value}}', addrUrl);
             output += lbl.replace('{{label}}', 'Balance').replace('{{value}}', etherValue + ' Ether');
+            output += lbl.replace('{{label}}', 'Current Nonce').replace('{{value}}', addrNonce);
             output += lbl.replace('{{label}}', 'USD Value').replace('{{value}}', '$ ' + usdPrice.toFixed(2) + ' <font size="1">(@' + ethPrice.USD + '/Eth)</font>');
             output += lbl.replace('{{label}}', 'EUR Value').replace('{{value}}', '€ ' + eurPrice.toFixed(2) + ' <font size="1">(@' + ethPrice.EUR + '/Eth)</font>');
             output += lbl.replace('{{label}}', 'BTC Value').replace('{{value}}', btcPrice.toFixed(2) + ' Btc' + ' <font size="1">(@' + ethPrice.BTC + '/Eth)</font>');
@@ -165,9 +167,29 @@ function generateAddrInfo(result, network, ethPrice, addr) {
     } catch (err) {
         generateTxErr(err, network);
     }
+}
 
+async function getAddrNonce(addr, value, isMainnet) {
 
+    if(isMainnet) {
+        const nonce = await callMainnetNetwork('', addr,'',value, 4).then(function (data) {
+            if (data.error) {
+                return -1;
+            } else {
+                return parseInt(data.result)
+            }
+        })
+        return nonce;
+    } else {
+        const nonce = await callTestnetNetwork('', addr,'',value, 4).then(function (data) {
+            if (data.error) {
+                return -1;
+            } else {
+                return parseInt(data.result)
+            }
+        })
+        return nonce;
+    }
 
-
-
+    return -1;
 }

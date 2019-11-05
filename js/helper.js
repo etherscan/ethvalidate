@@ -18,6 +18,8 @@ function callMainnetNetwork(txHash, addr, contractAddr, nodeName, type) {
         return getCommonAddress(url, addr);
     else if (type == 3)
         return getCommonToken(url, addr, contractAddr)
+    else if (type == 4)
+        return getCommonAddressNonce(url, addr);
 
 }
 
@@ -39,6 +41,8 @@ function callTestnetNetwork(txHash, addr, contractAddr, nodeName, type) {
         return getCommonAddress(url, addr);
     else if (type == 3)
         return getCommonToken(url, addr, contractAddr)
+    else if (type == 4)
+        return getCommonAddressNonce(url, addr);        
 
 }
 
@@ -122,6 +126,22 @@ function getCommonAddress(url, addr) {
     return new Promise(function (resolve, reject) {
 
         commonAPI(url, 'eth_getBalance', [addr, 'latest'])
+            .then(function (data) {
+                if (data.error)
+                    reject(data.error);
+
+                resolve(data);
+            }, function (err, val){              
+                reject(err);
+            })
+
+    })
+}
+
+function getCommonAddressNonce(url, addr) {
+    return new Promise(function (resolve, reject) {
+
+        commonAPI(url, 'eth_getTransactionCount', [addr, 'latest'])
             .then(function (data) {
                 if (data.error)
                     reject(data.error);
