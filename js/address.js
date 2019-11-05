@@ -131,7 +131,7 @@ async function generateAddrInfo(result, network, ethPrice, addr, isMainnet) {
             output = header.replace('{{network}}', network);
         } else {
 
-            var lbl = '<div class="row mb-1"><div class="col-sm-2">{{label}}:</div><div class="col-sm-9">{{value}}</div></div>';
+            var lbl = '<div class="row mb-1"><div class="col-sm-2 text-nowrap">{{label}}:</div><div class="col-sm-9">{{value}}</div></div>';
 
             output = header.replace('{{network}}', network);
 
