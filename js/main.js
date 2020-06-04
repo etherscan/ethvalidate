@@ -231,6 +231,9 @@ function getMainnetNetwork(){
         },
         {
             id: 'mycrypto', nodeName: 'mycrypto', url: 'https://api.mycryptoapi.com/eth', port: ''
+        },
+        {
+            id: 'chainstack', nodeName: 'chainstack', url: 'https://dreamy-curie:ended-thrive-pecan-unsnap-cupped-shady@nd-052-809-299.p2pify.com', port: ''
         }
     ];
 
@@ -241,6 +244,9 @@ function getTestnetNetwork() {
     var networkList = [
         {
             id: 'ropsten_infura',nodeName: 'ropsten (infura)', url: 'https://ropsten.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
+        },
+        {
+            id: 'ropsten_chainstack', nodeName: 'ropsten (chainstack)', url: 'https://heuristic-euclid:finch-juggle-define-tasty-unwell-lion@nd-687-380-359.p2pify.com', port: ''
         },
         {
             id: 'kovan_infura',nodeName: 'kovan (infura)', url: 'https://kovan.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
