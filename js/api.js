@@ -1,10 +1,16 @@
 function commonAPI(url, action, param){
    
+    var url = new URL(url);
     return $.ajax({
             type: 'POST',
             url: url,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
+            beforeSend: function (xhr) {
+                if (url.username && url.password) {
+                    xhr.setRequestHeader("Authorization", "Basic " + btoa(url.username + ":" + url.password));
+                }
+            },
             data: JSON.stringify({
                 'jsonrpc': '2.0',
                 'method': action,
