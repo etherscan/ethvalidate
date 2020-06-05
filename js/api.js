@@ -1,5 +1,5 @@
 function commonAPI(url, action, param){
-   
+
     var url = new URL(url);
     return $.ajax({
             type: 'POST',
@@ -20,11 +20,11 @@ function commonAPI(url, action, param){
             success: function (data) {
                 return data;
             },
-            error: function (err) {                      
+            error: function (err) {
                return err;
-            }            
+            }
         })
-    
+
 }
 
 function getEtherPrice(fsym, tsyms) {
@@ -38,7 +38,7 @@ function getEtherPrice(fsym, tsyms) {
                 resolve(data);
             },
             error: function (err) {
-                
+
                 reject(err);
             }
         })
