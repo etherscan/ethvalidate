@@ -13,12 +13,12 @@ $(document).ready(function () {
 });
 
 $(document).on('click','.btn-go',function(){
-    getToken();       
+    getToken();
   });
 
 
 function getToken() {
-    $('.data-info').empty(); 
+    $('.data-info').empty();
     positionFooter();
 
     var addr = $('#searchAddr').val();
@@ -42,7 +42,7 @@ function getToken() {
         } else {
             alert('Invalid Address');
             return;
-        }     
+        }
     }  else if (validateHash(40, contractAddr) === false){
 
         if (contractAddr.length === 40 ){
@@ -54,56 +54,21 @@ function getToken() {
         } else {
             alert('Invalid Contract Address');
             return;
-        }     
+        }
     }
 
     $('.loader').show();
     var count = 0;
     var totalSelectedNetwork = selectedNetwork.length + selectedTestNetwork.length;
-  
-    $.each(selectedNetwork, function (key, value) {     
+
+    $.each(selectedNetwork, function (key, value) {
         callMainnetNetwork('',addr, contractAddr, value, 3)
             .then(function (data) {
                 if (data.error) {
                     generateTxErr(data.error, value);
                 } else {
                     getEtherPrice(data.symbol, 'ETH')
-                        .then(function (ethPrice) {                          
-                            generateTokenInfo(data, value, ethPrice, contractAddr);
-                        });                   
-                }
-
-                count++;
-
-                if (count == totalSelectedNetwork) {
-                    $('.loader').hide();
-                    $('.datasource').show();
-                    positionFooter();
-                }
-
-            }, function(err){
-                generateTxErr(err.statusText, value);
-
-                count++;
-                
-                if (count == totalSelectedNetwork) {
-                    $('.loader').hide();
-                    $('.datasource').show();
-                    positionFooter();
-                }
-            });
-    });
-
-    $('.loader').show();
-
-    $.each(selectedTestNetwork, function (key, value) {     
-        callTestnetNetwork('',addr, contractAddr, value,3)
-            .then(function (data) {
-                if (data.error) {
-                    generateTxErr(data.error, value);
-                } else {
-                    getEtherPrice(data.symbol, 'ETH')
-                        .then(function (ethPrice) {                          
+                        .then(function (ethPrice) {
                             generateTokenInfo(data, value, ethPrice, contractAddr);
                         });
                 }
@@ -120,7 +85,42 @@ function getToken() {
                 generateTxErr(err.statusText, value);
 
                 count++;
-                
+
+                if (count == totalSelectedNetwork) {
+                    $('.loader').hide();
+                    $('.datasource').show();
+                    positionFooter();
+                }
+            });
+    });
+
+    $('.loader').show();
+
+    $.each(selectedTestNetwork, function (key, value) {
+        callTestnetNetwork('',addr, contractAddr, value,3)
+            .then(function (data) {
+                if (data.error) {
+                    generateTxErr(data.error, value);
+                } else {
+                    getEtherPrice(data.symbol, 'ETH')
+                        .then(function (ethPrice) {
+                            generateTokenInfo(data, value, ethPrice, contractAddr);
+                        });
+                }
+
+                count++;
+
+                if (count == totalSelectedNetwork) {
+                    $('.loader').hide();
+                    $('.datasource').show();
+                    positionFooter();
+                }
+
+            }, function(err){
+                generateTxErr(err.statusText, value);
+
+                count++;
+
                 if (count == totalSelectedNetwork) {
                     $('.loader').hide();
                     $('.datasource').show();
