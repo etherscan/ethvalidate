@@ -1,23 +1,23 @@
 $(document).ready(function () {
     var param = getParam('a');
-    
+
     checkNetwork();
-    
+
     if (!$.isEmptyObject(param)) {
         $('#searchAddr').val(param);
         getAddress();
     }
-    
+
 });
 
 $(document).on('click','.btn-go',function(){
-    getAddress();       
+    getAddress();
   });
 
 
 
 function getAddress() {
-    $('.data-info').empty(); 
+    $('.data-info').empty();
     positionFooter();
 
     var addr = $('#searchAddr').val();
@@ -40,14 +40,14 @@ function getAddress() {
         } else {
             alert('Invalid Address');
             return;
-        }     
+        }
     }
 
-  
+
     $('.loader').show();
     var count = 0;
     var totalSelectedNetwork = selectedNetwork.length + selectedTestNetwork.length;
-  
+
     $.each(selectedNetwork, function (key, value) {
         callMainnetNetwork('', addr,'',value, 2)
             .then(function (data) {
@@ -72,7 +72,7 @@ function getAddress() {
                 generateTxErr(err.statusText, value);
 
                 count++;
-                
+
                 if (count == totalSelectedNetwork) {
                     $('.loader').hide();
                     $('.datasource').show();
@@ -96,7 +96,7 @@ function getAddress() {
                 }
 
                 count++;
-                
+
                 if (count == totalSelectedNetwork) {
                     $('.loader').hide();
                     $('.datasource').show();
@@ -107,17 +107,17 @@ function getAddress() {
                 generateTxErr(err.statusText, value);
 
                 count++;
-                
+
                 if (count == totalSelectedNetwork) {
                     $('.loader').hide();
                     $('.datasource').show();
                     positionFooter();
                 }
             });
-           
+
     });
 
-    
+
 }
 
 async function generateAddrInfo(result, network, ethPrice, addr, isMainnet) {

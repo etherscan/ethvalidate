@@ -1,5 +1,5 @@
-$(document).ready(function() {    
-   
+$(document).ready(function() {
+
     $("#ethnetworkall").change(function() {
         if (this.checked) {
             $(".ethnetwork").each(function() {
@@ -23,7 +23,7 @@ $(document).ready(function() {
 
             if (isAllChecked == 0) {
                 $("#ethnetworkall").prop("checked", true);
-            }     
+            }
         }
         else {
             $("#ethnetworkall").prop("checked", false);
@@ -53,7 +53,7 @@ $(document).ready(function() {
 
             if (isAllChecked == 0) {
                 $("#testnetworkall").prop("checked", true);
-            }     
+            }
         }
         else {
             $("#testnetworkall").prop("checked", false);
@@ -74,13 +74,13 @@ $(document).ready(function() {
 
         console.log(network);
 
-        var nodeRegex = new RegExp("^[A-Za-z0-9? ,_-]+$");       
+        var nodeRegex = new RegExp("^[A-Za-z0-9? ,_-]+$");
         if (!nodeRegex.test(nodeName)){
             alert('Invalid Node name');
             return;
         }
-        
-        var urlRegex = new RegExp('^(https?:\\/\\/)((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|((\\d{1,3}\\.){3}\\d{1,3}))(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*(\\?[;&a-z\\d%_.~+=-]*)?(\\#[-a-z\\d_]*)?$', 'i');        
+
+        var urlRegex = new RegExp('^(https?:\\/\\/)((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|((\\d{1,3}\\.){3}\\d{1,3}))(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*(\\?[;&a-z\\d%_.~+=-]*)?(\\#[-a-z\\d_]*)?$', 'i');
         if (!urlRegex.test(url)){
             alert('Invalid Url');
             return;
@@ -93,10 +93,10 @@ $(document).ready(function() {
                 return;
             }
         }
-        
+
 
         var networkList = loadCustomNetwork(network);
-    
+
         networkList.push({nodeName: nodeName, url: url, port: port});
 
         window.localStorage.setItem(network, JSON.stringify(networkList));
@@ -109,32 +109,32 @@ $(document).ready(function() {
 
 function checkNetwork() {
     var n = getParam('n');
-    
+
     if (!$.isEmptyObject(n)){
 
         var _networks = n.split(',');
 
-        $.each(_networks, function (key, net) { 
+        $.each(_networks, function (key, net) {
             if (net == 'mainnet')
                 $("#ethnetworkall").trigger('click');
             else if (net == 'testnet')
                 $("#testnetworkall").trigger('click');
             else
-                $('#chk' + net + '').trigger('click');  
+                $('#chk' + net + '').trigger('click');
         });
-        
+
     } else {
         $("#ethnetworkall").trigger('click');
     }
 
 }
 
-$(window).bind("load", function() {        
-    positionFooter();    
+$(window).bind("load", function() {
+    positionFooter();
     $(window)
             .scroll(positionFooter)
             .resize(positionFooter)
-            
+
 });
 
 function positionFooter() {
@@ -142,7 +142,7 @@ function positionFooter() {
     var footerHeight = 0,
     footerTop = 0,
     $footer = $("footer");
-    
+
     footerHeight = $footer.height();
     footerTop = ($(window).scrollTop()+$(window).height()-footerHeight)+"px";
 
@@ -154,7 +154,7 @@ function positionFooter() {
        $footer.css({
             position: "static"
        })
-   }  
+   }
 }
 
 function loadNetwork(){
@@ -163,11 +163,11 @@ function loadNetwork(){
     var customMainnnet = loadCustomNetwork('mainnet');
     var testnet = getTestnetNetwork();
     var customTestnet  = loadCustomNetwork('testnet');
- 
+
     $('ul.ulmainnet > li').not(':first').remove();
 
     $.each(mainnet, function(k, v){
-        
+
         if (v.nodeName){
             $('<li />', {html: ' <input type="checkbox" id="chk'+ v.id + '" class="ethnetwork" name="' + v.nodeName +'"> ' + v.nodeName , class:'list-group-item'}).appendTo('ul.ulmainnet');
         }
@@ -182,21 +182,21 @@ function loadNetwork(){
     $('ul.ultestnet > li').not(':first').remove();
 
     $.each(testnet, function(k, v){
-        
+
         if (v.nodeName){
             $('<li />', {html: ' <input type="checkbox" id="chk'+ v.id + '" class="testnetwork" name="' + v.nodeName +'"> ' + v.nodeName , class:'list-group-item'}).appendTo('ul.ultestnet');
         }
     });
 
     $.each(customTestnet, function(k,v){
-      
+
         if (v.nodeName){
             $('<li />', {html: ' <input type="checkbox" id="chk'+ v.nodeName + '" class="testnetwork" name="' + v.nodeName +'"> ' + v.nodeName  + '<a href="#" title="Remove Custom Node" onclick="removeNetwork(\'testnet\', \'' + v.nodeName + '\')" style="float:right;color:#f80000"><i class="fa fa-minus"></i></a>', class:'list-group-item'}).appendTo('ul.ultestnet');
         }
     });
 
 
-    
+
 }
 
 function removeNetwork(network, nodeName){
@@ -212,13 +212,13 @@ function removeNetwork(network, nodeName){
 
 
 function loadCustomNetwork(network){
-    var networkList = [];   
-        
+    var networkList = [];
+
     if (window.localStorage.getItem(network))
         networkList = JSON.parse(window.localStorage.getItem(network));
 
     return networkList
-    
+
 }
 
 function getMainnetNetwork(){
@@ -231,6 +231,9 @@ function getMainnetNetwork(){
         },
         {
             id: 'mycrypto', nodeName: 'mycrypto', url: 'https://api.mycryptoapi.com/eth', port: ''
+        },
+        {
+            id: 'chainstack', nodeName: 'chainstack', url: 'https://dreamy-curie:ended-thrive-pecan-unsnap-cupped-shady@nd-052-809-299.p2pify.com', port: ''
         }
     ];
 
@@ -241,6 +244,9 @@ function getTestnetNetwork() {
     var networkList = [
         {
             id: 'ropsten_infura',nodeName: 'ropsten (infura)', url: 'https://ropsten.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
+        },
+        {
+            id: 'ropsten_chainstack', nodeName: 'ropsten (chainstack)', url: 'https://heuristic-euclid:finch-juggle-define-tasty-unwell-lion@nd-687-380-359.p2pify.com', port: ''
         },
         {
             id: 'kovan_infura',nodeName: 'kovan (infura)', url: 'https://kovan.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
@@ -374,7 +380,7 @@ function convertDecimals(decimal, value){
 }
 
 function validateHash(len, hash){
-    
+
     var _regex = '0x([A-Fa-f0-9]{' +  len + '})';
     var regex = new RegExp(_regex);
 
@@ -385,7 +391,7 @@ function validateHash(len, hash){
 }
 
 //ether conversion
-function getWeiValue(number){    
+function getWeiValue(number){
     var value = new BigNumber(String(number)).times(1);
     return value.toString(10);
 }
@@ -407,10 +413,10 @@ function getCustomABI() {
 }
 
 function generateTxErr(err, network) {
-  
-    var lbl = '<div class="card text-white bg-danger mt-3"><div class="card-body"><h5 class="card-title">' + network + '</h5>' 
+
+    var lbl = '<div class="card text-white bg-danger mt-3"><div class="card-body"><h5 class="card-title">' + network + '</h5>'
         lbl += '<div class="row mb-1"><div class="col-md-12"><h6> Error : ' + err + '</h6> <button class="btn btn-default btn-sm btn-go">Try Again</button></div></div>';
 
     $('.data-info').append(lbl);
-        
+
 }

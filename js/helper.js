@@ -4,15 +4,15 @@ function callMainnetNetwork(txHash, addr, contractAddr, nodeName, type) {
 
     var networkList = getMainnetNetwork();
     var customMainnnet = loadCustomNetwork('mainnet');
-    
+
     networkList = $.merge(networkList, customMainnnet);
-    var _network = networkList.filter(x => x.nodeName == nodeName);  
+    var _network = networkList.filter(x => x.nodeName == nodeName);
     var url = _network[0].url;
 
     if (_network[0].port)
         url += ':' + _network.port;
 
-    if (type === 1)        
+    if (type === 1)
         return getCommonTransaction(url, txHash);
     else if (type === 2)
         return getCommonAddress(url, addr);
@@ -42,7 +42,7 @@ function callTestnetNetwork(txHash, addr, contractAddr, nodeName, type) {
     else if (type == 3)
         return getCommonToken(url, addr, contractAddr)
     else if (type == 4)
-        return getCommonAddressNonce(url, addr);        
+        return getCommonAddressNonce(url, addr);
 
 }
 
@@ -55,7 +55,7 @@ function getCommonTransaction(url, txHash) {
                     reject(data.error);
                 else if (data.result == null)
                     resolve(data);
-                else {                    
+                else {
                     var receipt = commonAPI(url, 'eth_getTransactionReceipt', [txHash]);
                     var block = commonAPI(url, 'eth_getBlockByNumber', [data.result.blockNumber, false]);
                     var latestBlock = commonAPI(url, 'eth_blockNumber', []);
@@ -71,13 +71,13 @@ function getCommonTransaction(url, txHash) {
                         var tempTokens =[];
                         //get total transfer
                         $.each(_receipt[0].result.logs, function (key, log) {
-                            if (log.topics[0] === '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef') {                       
-                                tokens.push(log.address);                               
+                            if (log.topics[0] === '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef') {
+                                tokens.push(log.address);
                                 totalCount++;
                             }
                         });
 
-                        if (totalCount > 0){                           
+                        if (totalCount > 0){
                             tokens = unique(tokens);
 
                             var tokenCount = 0;
@@ -92,31 +92,31 @@ function getCommonTransaction(url, txHash) {
 
                                     tokenCount++
 
-                                    if (tokenCount == tokens.length) {                                                                 
+                                    if (tokenCount == tokens.length) {
                                         $.each(_receipt[0].result.logs, function (key, log) {
-                                            if (log.topics[0] === '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef') {                                            
-                                                var _token = tempTokens.filter(x => x.id === log.address);                                                
-                                                                                                                                                         
+                                            if (log.topics[0] === '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef') {
+                                                var _token = tempTokens.filter(x => x.id === log.address);
+
                                                 log.symbol = _token[0].symbol;
-                                                log.decimal = _token[0].decimal;                                            
-                                                                                                                                          
+                                                log.decimal = _token[0].decimal;
+
                                             }
                                         });
 
                                         return resolve(data);
-                                
+
                                     }
                                 })
 
-                               
+
                             })
 
                         } else {
                             return resolve(data);
-                        }                    
+                        }
                     });
                 }
-            }, function (err){            
+            }, function (err){
                 reject(err);
             })
     })
@@ -131,7 +131,7 @@ function getCommonAddress(url, addr) {
                     reject(data.error);
 
                 resolve(data);
-            }, function (err, val){              
+            }, function (err, val){
                 reject(err);
             })
 
@@ -147,7 +147,7 @@ function getCommonAddressNonce(url, addr) {
                     reject(data.error);
 
                 resolve(data);
-            }, function (err, val){              
+            }, function (err, val){
                 reject(err);
             })
 
@@ -174,7 +174,7 @@ function getCommonToken(url, addr, contractAddr) {
                         return resolve(data);
                     });
                 }
-            }, function (err, val){              
+            }, function (err, val){
                 reject(err);
             })
 
