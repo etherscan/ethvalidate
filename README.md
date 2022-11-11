@@ -11,13 +11,13 @@ sample usage<br>
 https://etherscan.github.io/ethvalidate/?tx=0xa2882cca690d1898d7cc13ca9c978c04e83179eb07c0a6aa7f2fba355d50bd52
 <br><br>
 <b>Address</b> <br>
-a - address
+a - 0x7dcf087004412a55ecb2fab926ff0fbe4fd6472e
 <br>
   sample usage<br>
   https://etherscan.github.io/ethvalidate/address?a=0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be
 <br><br>
 <b>Token</b><br>
-a - address
+a - 0x7dcf087004412a55ecb2fab926ff0fbe4fd6472e
 c - contractaddress
 <br>
    sample usage<br>
