@@ -230,7 +230,7 @@ function getMainnetNetwork(){
             id: 'myetherwallet', nodeName: 'myetherwallet', url: 'https://api.myetherwallet.com/eth', port: ''
         },
         {
-            id: 'mycrypto', nodeName: 'mycrypto', url: 'https://api.mycryptoapi.com/eth', port: ''
+            id: 'cloudflare', nodeName: 'cloudflare', url: 'https://cloudflare-eth.com', port: ''
         },
         {
             id: 'chainstack', nodeName: 'chainstack', url: 'https://dreamy-curie:ended-thrive-pecan-unsnap-cupped-shady@nd-052-809-299.p2pify.com', port: ''
