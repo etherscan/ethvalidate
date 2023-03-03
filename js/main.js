@@ -241,18 +241,9 @@ function getMainnetNetwork(){
 }
 
 function getTestnetNetwork() {
-    var networkList = [
+    var networkList = [        
         {
-            id: 'ropsten_infura',nodeName: 'ropsten (infura)', url: 'https://ropsten.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
-        },
-        {
-            id: 'ropsten_chainstack', nodeName: 'ropsten (chainstack)', url: 'https://heuristic-euclid:finch-juggle-define-tasty-unwell-lion@nd-687-380-359.p2pify.com', port: ''
-        },
-        {
-            id: 'kovan_infura',nodeName: 'kovan (infura)', url: 'https://kovan.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
-        },
-        {
-            id: 'rinkeby_infura', nodeName: 'rinkeby (infura)', url: 'https://rinkeby.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
+            id: 'sepolia_infura', nodeName: 'sepolia (infura)', url: 'https://sepolia.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
         },
         {
             id: 'goerli_infura', nodeName: 'goerli (infura)', url: 'https://goerli.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
