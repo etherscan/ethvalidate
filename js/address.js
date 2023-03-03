@@ -143,12 +143,8 @@ async function generateAddrInfo(result, network, ethPrice, addr, isMainnet) {
             var btcPrice = ethPrice.BTC * etherValue;
             var url = 'etherscan.io';
 
-            if (network.indexOf('kovan') > -1)
-                url = 'kovan.' + url;
-            else if (network.indexOf('ropsten') > -1)
-                url = 'ropsten.' + url;
-            else if (network.indexOf('rinkeby') > -1)
-                url = 'rinkeby.' + url;
+            if (network.indexOf('sepolia') > -1)
+                url = 'sepolia.' + url;
             else if (network.indexOf('goerli') > -1)
                 url = 'goerli.' + url;
 
