@@ -32,10 +32,7 @@ n - network<br>
   <li>myetherwallet</li>
   <li>chainstack</li>
   <li><b>Testnet</b></li>
-  <li>ropsten_infura</li>
-  <li>ropsten_chainstack</li>
-  <li>kovan_infura</li>
-  <li>rinkeby_infura</li>
+  <li>sepolia_infura</li>
   <li>goerli_infura</li>
 </ul>
 sample usage <br>
