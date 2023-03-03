@@ -37,7 +37,7 @@ n - network<br>
 </ul>
 sample usage <br>
 https://etherscan.github.io/ethvalidate/?n=infura,mycrypto <br>
-https://etherscan.github.io/ethvalidate/?n=ropsten_infura
+https://etherscan.github.io/ethvalidate/?n=sepolia_infura
 
 
 # Disclaimer
