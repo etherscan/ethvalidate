@@ -224,6 +224,9 @@ function loadCustomNetwork(network){
 function getMainnetNetwork(){
     var networkList = [
         {
+           id: 'quicknode', nodeName: 'Quicknode', url: 'https://clean-long-lambo.quiknode.pro/5ffd457306a0eaa8b07568a7d044ad774c134e3a/', port: ''
+        },
+	{
            id: 'infura', nodeName: 'infura', url: 'https://mainnet.infura.io/v3/a45f7ab372124312b0c1c2c93abd21cf', port: ''
         },
         {
