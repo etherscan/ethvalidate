@@ -27,6 +27,7 @@ c - contractaddress
 n - network<br>
 <ul>
   <li><b>Mainnet</b></li>
+  <li>QuickNode</li>
   <li>infura</li>
   <li>mycrypto</li>
   <li>myetherwallet</li>
