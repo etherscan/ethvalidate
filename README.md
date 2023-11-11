@@ -8,9 +8,9 @@ This tool is to validate transaction, address and token balance from public ethe
 tx - transactionhash
 <br>
 sample usage<br>
-https://etherscan.github.io/ethvalidate/?tx=0xa2882cca690d1898d7cc13ca9c978c04e83179eb07c0a6aa7f2fba355d50bd52
+https://etherscan.github.io/ethvalidate/?tx=0x47fc32e0e2882dac1691464e3aa93126f6963ca8ae651c30b7721555c3aedc6d
 <br><br>
-<b>Address</b> <br>
+<b>Address 0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72 </b> <br>
 a - address
 <br>
   sample usage<br>
