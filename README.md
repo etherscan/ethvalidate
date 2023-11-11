@@ -18,7 +18,7 @@ a - address
 <br><br>
 <b>Token</b><br>
 a - address
-c - contractaddress
+c - contractaddress:[<0x3bAa3d2080f339ef62eBe24De8dd27b6eB3376E0@1>]
 <br>
    sample usage<br>
   https://etherscan.github.io/ethvalidate/token?a=0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be&c=0x12480e24eb5bec1a9d4369cab6a80cad3c0a377a
